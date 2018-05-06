@@ -13,7 +13,7 @@ g = 2.5
 c = 4
 m = 50
 
-oko = cv2.imread("oko.jpg")
+oko = cv2.imread("healthy/01_h.jpg")
 
 img2 = rgb2gray(oko)
 
@@ -36,8 +36,14 @@ sobel = filters.sobel(img2)
 # sobel2 = filters.sobel(img2)
 
 # img = cv2.resize(img, (500, 500))
+img = cv2.resize(img, (500, 332))
+sobel = cv2.resize(sobel, (500, 332))
+
 cv2.imshow('Oko', img)
 cv2.imshow('Sobel', sobel)
+
+cv2.moveWindow('Oko', 100, 50)
+cv2.moveWindow('Sobel', 600, 50)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
