@@ -10,10 +10,33 @@ from PIL import ImageEnhance, Image
 import os
 from PIL import Image
 
-# left -> 81 (false)
-# right -> 83 (true)
+# left -> 81 -> move to 0false folder
+# right -> 83 -> move to 0true folder
+# backspace -> 8 -> revert last move
+# escape -> 27 -> close program
+# key1 -> 49 -> turn on/off gausian blur filter
+# key2 -> 50 -> turn on/off median blur filter
+# key3 -> 51 -> turn on/off bil filter
+# key4 -> 52 -> less gamma
+# key5 -> 53 -> more gamma
+# key6 -> 54 -> less contrast
+# key7 -> 55 -> more contrast
+# other -> skip photo and move it to 0skipped dir
+
 
 IMG_SIZE = 200
+
+KEY_LEFT = 81
+KEY_RIGHT = 83
+KEY_BACKSPACE = 8
+KEY_ESCAPE = 27
+KEY_1 = 49
+KEY_2 = 50
+KEY_3 = 51
+KEY_4 = 52
+KEY_5 = 53
+KEY_6 = 54
+KEY_7 = 55
 
 
 def drawLines(img, g, b, r):
@@ -60,11 +83,6 @@ def main():
     CONTRAST_STEP = 2
     GAMMA_STEP = 0.2
 
-    gamma_nored = 2.5
-    contrast_nored = 92
-    gamma_hsv = 1.5
-    contrast_hsv = 2
-
     GAUSIAN_BLUR = True
     MEDIAN_BLUR = True
     BIL_FILTER = True
@@ -107,13 +125,13 @@ def main():
             key = cv2.waitKey(0)
             print(key)
 
-            if (key == 49):  # cyfry od 0
+            if (key == KEY_1):  # cyfry od 1
                 GAUSIAN_BLUR = not GAUSIAN_BLUR
-            elif (key == 50):
+            elif (key == KEY_2):
                 MEDIAN_BLUR = not MEDIAN_BLUR
-            elif (key == 51):
+            elif (key == KEY_3):
                 BIL_FILTER = not BIL_FILTER
-            elif (key == 52):
+            elif (key == KEY_4):
                 gamma_hsv = gamma_hsv - GAMMA_STEP
                 gamma_nored = gamma_nored - GAMMA_STEP
                 if gamma_nored < 0:
@@ -121,11 +139,11 @@ def main():
                 if gamma_hsv < 0:
                     gamma_hsv = 0
                 print("gamma set to : ", gamma_nored, ", ", gamma_hsv)
-            elif (key == 53):
+            elif (key == KEY_5):
                 gamma_hsv = gamma_hsv + GAMMA_STEP
                 gamma_nored = gamma_nored + GAMMA_STEP
                 print("gamma set to : ", gamma_nored, ", ", gamma_hsv)
-            elif (key == 54):
+            elif (key == KEY_6):
                 contrast_hsv = contrast_hsv - CONTRAST_STEP
                 contrast_nored = contrast_nored - CONTRAST_STEP
                 if contrast_nored < 0:
@@ -133,35 +151,36 @@ def main():
                 if contrast_hsv < 0:
                     contrast_hsv = 0
                 print("contrast set to : ", contrast_nored, ", ", contrast_hsv)
-            elif (key == 55):
+            elif (key == KEY_7):
                 contrast_hsv = contrast_hsv + CONTRAST_STEP
                 contrast_nored = contrast_nored + CONTRAST_STEP
                 print("contrast set to : ", contrast_nored, ", ", contrast_hsv)
             elif key<49 or key > 60:
                 break
 
-        if key == 83:  # Right_Arrow
+        if key == KEY_RIGHT:  # Right_Arrow
             shutil.move(file.title().lower(), "fragments50/0true/" + file.title().lower().split('/')[-1])
             # os.rename(img.title().lower(), "fragments50/0true/"+img.title().lower())
             print(file.title(), " is TRUE -> moving to ./0true/\n")
             last_moved = "fragments50/0true/" + file.title().lower().split('/')[-1]
 
-        elif key == 81:  # Left_Arrow
+        elif key == KEY_LEFT:  # Left_Arrow
             shutil.move(file.title().lower(), "fragments50/0false/" + file.title().lower().split('/')[-1])
             # os.rename(img.title().lower(), "fragments50/0false/"+img.title().lower())
             print(file.title(), " is FALSE -> moving to ./0false/\n")
             last_moved = "fragments50/0false/" + file.title().lower().split('/')[-1]
 
-        elif key == 8:  # Backspace
+        elif key == KEY_BACKSPACE:  # Backspace
             cv2.destroyAllWindows()
             shutil.move(last_moved, "fragments50/" + last_moved.split('/')[-1])
             print("Reverting changes for : ", last_moved)
 
-        elif key == 27:  # Escape
+        elif key == KEY_ESCAPE:  # Escape
             cv2.destroyAllWindows()
             break
 
-        shutil.move(file.title().lower(), "fragments50/0skipped/" + file.title().lower().split('/')[-1])
+        else:
+            shutil.move(file.title().lower(), "fragments50/0skipped/" + file.title().lower().split('/')[-1])
 
         cv2.destroyAllWindows()
 
