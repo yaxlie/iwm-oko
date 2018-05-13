@@ -90,7 +90,7 @@ def main():
     last_moved = ""
 
     images = []
-    for img in glob.glob("fragments50/*.jpg"):
+    for img in glob.glob("fragments64(2)/*.jpg"):
         images.append(img)
 
     # images = [cv2.imread(file) for file in glob.glob("fragments50/*.jpg")]
@@ -159,20 +159,20 @@ def main():
                 break
 
         if key == KEY_RIGHT:  # Right_Arrow
-            shutil.move(file.title().lower(), "fragments50/0true/" + file.title().lower().split('/')[-1])
+            shutil.move(file.title().lower(), "fragments64(2)/0true/" + file.title().lower().split('/')[-1])
             # os.rename(img.title().lower(), "fragments50/0true/"+img.title().lower())
             print(file.title(), " is TRUE -> moving to ./0true/\n")
-            last_moved = "fragments50/0true/" + file.title().lower().split('/')[-1]
+            last_moved = "fragments64(2)/0true/" + file.title().lower().split('/')[-1]
 
         elif key == KEY_LEFT:  # Left_Arrow
-            shutil.move(file.title().lower(), "fragments50/0false/" + file.title().lower().split('/')[-1])
+            shutil.move(file.title().lower(), "fragments64(2)/0false/" + file.title().lower().split('/')[-1])
             # os.rename(img.title().lower(), "fragments50/0false/"+img.title().lower())
             print(file.title(), " is FALSE -> moving to ./0false/\n")
-            last_moved = "fragments50/0false/" + file.title().lower().split('/')[-1]
+            last_moved = "fragments64(2)/0false/" + file.title().lower().split('/')[-1]
 
         elif key == KEY_BACKSPACE:  # Backspace
             cv2.destroyAllWindows()
-            shutil.move(last_moved, "fragments50/" + last_moved.split('/')[-1])
+            shutil.move(last_moved, "fragments64(2)/" + last_moved.split('/')[-1])
             print("Reverting changes for : ", last_moved)
 
         elif key == KEY_ESCAPE:  # Escape
@@ -180,7 +180,7 @@ def main():
             break
 
         else:
-            shutil.move(file.title().lower(), "fragments50/0skipped/" + file.title().lower().split('/')[-1])
+            shutil.move(file.title().lower(), "fragment64/0skipped/" + file.title().lower().split('/')[-1])
 
         cv2.destroyAllWindows()
 
