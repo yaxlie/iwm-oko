@@ -23,7 +23,7 @@ from PIL import Image
 # key7 -> 55 -> more contrast
 # other -> skip photo and move it to 0skipped dir
 
-FOLDER_NAME = "fragments"
+FOLDER_NAME = "fragments50"
 
 IMG_SIZE = 200
 
