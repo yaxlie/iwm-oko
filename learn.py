@@ -3,7 +3,7 @@ from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 
 from vizualizations import losses_accuracies_plots
 
-NUM_ITERS = 5000
+NUM_ITERS = 200
 DISPLAY_STEP = 100
 BATCH = 100
 
@@ -122,6 +122,7 @@ with tf.Session() as sess:
             acc_trn, loss_trn, w, b = sess.run([accuracy, cross_entropy, allweights, allbiases],
                                                feed_dict={X: batch_X, Y_: batch_Y, pkeep: 1.0})
 
+            # print(accuracy, cross_entropy, allweights, allbiases)
             acc_tst, loss_tst = sess.run([accuracy, cross_entropy],
                                          feed_dict={X: mnist.test.images, Y_: mnist.test.labels, pkeep: 1.0})
 
@@ -136,7 +137,18 @@ with tf.Session() as sess:
         # the back-propagation training step
         sess.run(train_step, feed_dict={X: batch_X, Y_: batch_Y, pkeep: 0.75})
 
-title = "MNIST_3.0 5 layers 3 conv"
+
+    # Save the variables to disk.
+    save_path = saver.save(sess, "./tmp/model.ckpt")
+    print("Model saved in path: %s" % save_path)
+
+
+
+
+# title = "MNIST_3.0 5 layers 3 conv"
+
+#Now, save the graph
+
 # Restults Test accuracy:
 # mnist_1.0_single_layer_nn acc= 0.9237
 # mnist_2.0_5_layer_nn.py  acc = 0.9534
@@ -146,5 +158,5 @@ title = "MNIST_3.0 5 layers 3 conv"
 
 # sample output for 5k iterations
 
-title = "MNIST_3.0 5 layers 3 conv"
-losses_accuracies_plots(train_losses,train_acc,test_losses, test_acc,title,DISPLAY_STEP)
+# title = "MNIST_3.0 5 layers 3 conv"
+# losses_accuracies_plots(train_losses,train_acc,test_losses, test_acc,title,DISPLAY_STEP)
