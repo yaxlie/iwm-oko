@@ -11,7 +11,7 @@ import glob
 
 batch_size = 128
 num_classes = 2
-epochs = 500
+epochs = 5
 
 # input image dimensions
 img_x, img_y = 64, 64
