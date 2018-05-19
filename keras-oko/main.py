@@ -3,11 +3,12 @@ import random
 import numpy as np
 import cv2
 import sys
+import recognize
 
 
 def classify_img(img):
     # todo zwraca true jesli img jest naczyniem krwionosnym, false wpw.
-    return bool(random.getrandbits(1))
+    return recognize.CheckImages(np.expand_dims(img, axis=0))
 
 CHUNK_SIZE = 64
 WIDTH_RESIZED = 876
@@ -25,6 +26,7 @@ for w in range (0,width-CHUNK_SIZE):
         img_chunk = img_origin[h:h+CHUNK_SIZE, w:w+CHUNK_SIZE]
         if classify_img(img_chunk):
             img_result[h+int(CHUNK_SIZE/2),w+int(CHUNK_SIZE/2)] = (255, 255, 255)
+        print("chunk ",w," ",h)
 
 #     debug
     b = ("Loading [" + "#" * int(w//(width/10)) + " " * (10 - int(w//(width/10))) + "]")
