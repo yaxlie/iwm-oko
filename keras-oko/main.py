@@ -57,7 +57,7 @@ for arg in sys.argv:
         images = []
     #     print(w)
 
-    cv2.imwrite("result_" + image_name, img_result)
+    cv2.imwrite("./res/result_" + image_name, img_result)
 #     resized_image = cv2.resize(img_result, (WIDTH_RESIZED, HEIGHT_RESIZED))
 #     cv2.imshow(image_name, resized_image)
 #
