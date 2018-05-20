@@ -22,10 +22,7 @@ img_result = np.zeros([height,width,3],dtype=np.uint8)
 
 # recognize and set new image
 for w in range (0,width-CHUNK_SIZE):
-# for w in range (100,200):
     for h in range(0, height-CHUNK_SIZE):
-    # for h in range(100, 200):
-
         img_chunk = img_origin[h:h+CHUNK_SIZE, w:w+CHUNK_SIZE]
         if classify_img(img_chunk):
             img_result[h+int(CHUNK_SIZE/2),w+int(CHUNK_SIZE/2)] = (255, 255, 255)
@@ -38,7 +35,7 @@ for w in range (0,width-CHUNK_SIZE):
     sys.stdout.flush()
 
 
-
+cv2.imwrite("result.jpg", img_result)
 resized_image = cv2.resize(img_result, (WIDTH_RESIZED, HEIGHT_RESIZED))
 cv2.imshow("OKO", resized_image)
 cv2.waitKey(0)
