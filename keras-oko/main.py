@@ -35,7 +35,7 @@ for w in range (0,width-CHUNK_SIZE):
         if classification[h]:
             img_result[h+int(CHUNK_SIZE/2),w+int(CHUNK_SIZE/2)] = (255, 255, 255)
 #        print("chunk ",w," ",h)
-    print(w)
+#     print(w)
 #     debug
     b = ("Loading [" + "#" * int(w//(width/10)) + " " * (10 - int(w//(width/10))) + "]")
     # \r prints a carriage return first, so `b` is printed on top of the previous line.
