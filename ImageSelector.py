@@ -180,8 +180,8 @@ def main():
             cv2.destroyAllWindows()
             break
 
-        else:
-            shutil.move(file.title().lower(), FOLDER_NAME+"/0skipped/" + file.title().lower().split('/')[-1])
+        # else:
+        #     shutil.move(file.title().lower(), FOLDER_NAME+"/0skipped/" + file.title().lower().split('/')[-1])
 
         cv2.destroyAllWindows()
 
