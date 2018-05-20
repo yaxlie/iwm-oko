@@ -200,7 +200,7 @@ def main():
             # else:
             #     shutil.move(file.title().lower(), FOLDER_NAME+"/0skipped/" + file.title().lower().split('/')[-1])
 
-            cv2.destroyAllWindows()
+            # cv2.destroyAllWindows()
 
 
 if __name__ == '__main__': main()

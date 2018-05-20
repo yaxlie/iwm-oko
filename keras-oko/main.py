@@ -21,10 +21,10 @@ height, width, chan = img_origin.shape
 img_result = np.zeros([height,width,3],dtype=np.uint8)
 
 # recognize and set new image
-# for w in range (0,width-CHUNK_SIZE):
-for w in range (100,200):
-#     for h in range(0, height-CHUNK_SIZE):
-    for h in range(100, 200):
+for w in range (0,width-CHUNK_SIZE):
+# for w in range (100,200):
+    for h in range(0, height-CHUNK_SIZE):
+    # for h in range(100, 200):
 
         img_chunk = img_origin[h:h+CHUNK_SIZE, w:w+CHUNK_SIZE]
         if classify_img(img_chunk):
