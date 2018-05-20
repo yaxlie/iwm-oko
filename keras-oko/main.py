@@ -15,10 +15,7 @@ WIDTH_RESIZED = 876
 HEIGHT_RESIZED = 584
 
 
-img_origin = cv2.imread('./res/02.jpg')
-
-img_origin = cv2.resize(img_origin, (WIDTH_RESIZED, HEIGHT_RESIZED))
-
+img_origin = cv2.imread('./res/01.jpg')
 height, width, chan = img_origin.shape
 
 img_result = np.zeros([height,width,3],dtype=np.uint8)
@@ -37,7 +34,7 @@ for w in range (0,width-CHUNK_SIZE):
 #        print("chunk ",w," ",h)
 #     print(w)
 #     debug
-    b = ("Loading [" + "#" * int(w//(width/10)) + " " * (10 - int(w//(width/10))) + "]")
+    b = ("Loading [" + "#" * int(w//(width/100)) + " " * (100 - int(w//(width/100))) + "]")
     # \r prints a carriage return first, so `b` is printed on top of the previous line.
     sys.stdout.write('\r' + b)
     sys.stdout.flush()
