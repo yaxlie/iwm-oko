@@ -30,8 +30,7 @@ for arg in sys.argv[1::]:
     img_result = np.zeros([height,width,3],dtype=np.uint8)
 
     # recognize and set new image
-    MAX_IMAGES_COUNT = 1000000
-    old_w = 0
+
     images=[]
 
 
@@ -45,22 +44,18 @@ for arg in sys.argv[1::]:
         for h in range(0, height-CHUNK_SIZE):
             images.append(img_origin[h:h+CHUNK_SIZE, w:w+CHUNK_SIZE])
 
-        if(len(images) + height <= MAX_IMAGES_COUNT and w < width-CHUNK_SIZE-1):
-            continue
         # set pixels
         np_list = np.array([img for img in images])
         classification = classify_img(np_list)
-        for w2 in range(old_w, w-1):
-            for h in range(0, height - CHUNK_SIZE):
-                if classification[(w2*(width-CHUNK_SIZE)) + h]:
-                    img_result[h+int(CHUNK_SIZE/2),w2+int(CHUNK_SIZE/2)] = (255, 255, 255)
-        old_w = w + 1
+        for h in range(0, height - CHUNK_SIZE):
+            if classification[h]:
+                img_result[h+int(CHUNK_SIZE/2),w+int(CHUNK_SIZE/2)] = (255, 255, 255)
         images = []
     #     print(w)
 
     cv2.imwrite("./res/result_" + image_name, img_result)
-#     resized_image = cv2.resize(img_result, (WIDTH_RESIZED, HEIGHT_RESIZED))
-#     cv2.imshow(image_name, resized_image)
+    resized_image = cv2.resize(img_result, (WIDTH_RESIZED, HEIGHT_RESIZED))
+    cv2.imshow(image_name, resized_image)
 #
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
